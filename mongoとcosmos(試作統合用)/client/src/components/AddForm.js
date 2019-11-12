@@ -2,8 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { 
   changeName, changeAge, initializeForm,
-  requestData, receiveDataSuccess, receiveDataFailed  
+   requestData, receiveDataSuccess, receiveDataFailed
 } from '../actions'
+
 
 const AddForm = ({ store }) => {
   const { name, age } = store.getState().form
@@ -11,19 +12,19 @@ const AddForm = ({ store }) => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    store.dispatch(requestData()) 
+     store.dispatch(requestData())
     axios.post('/api/characters', {
       name,
       age,
     })
     .then(response => {
       store.dispatch(initializeForm())
-      const characterArray = response.data
-      store.dispatch(receiveDataSuccess(characterArray))
+       const characterArray = response.data
+       store.dispatch(receiveDataSuccess(characterArray))
     })
     .catch(err => {
       console.error(new Error(err))
-      store.dispatch(receiveDataFailed())
+       store.dispatch(receiveDataFailed())
     })
   }
 
